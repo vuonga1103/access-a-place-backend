@@ -1,7 +1,6 @@
 class EstablishmentsController < ApplicationController
 
   def index
-    establishments = Establishment.all
-    render json: establishments, include: "reviews,reviews.user"
+    render json: Establishment.all, include: "reviews,reviews.user"
   end
 end
