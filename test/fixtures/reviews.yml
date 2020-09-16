@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  establishment_id: 1
+  entrance_rating: 1
+  bathroom_rating: 1
+  parking_rating: 1
+  interior_rating: 1
+  content: MyText
+
+two:
+  user_id: 1
+  establishment_id: 1
+  entrance_rating: 1
+  bathroom_rating: 1
+  parking_rating: 1
+  interior_rating: 1
+  content: MyText
