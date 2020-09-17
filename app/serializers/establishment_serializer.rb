@@ -1,6 +1,5 @@
 class EstablishmentSerializer < ActiveModel::Serializer
-  attributes :id, :place_id
+  attributes :id, :place_id, :reviews
 
   has_many :reviews
-  has_many :users, through: :reviews
 end
