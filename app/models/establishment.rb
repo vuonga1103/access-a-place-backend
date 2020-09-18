@@ -2,6 +2,8 @@ class Establishment < ApplicationRecord
   has_many :reviews
   has_many :users, through: :reviews
 
+  
+
   # Checks if establishment with given place_id exists in DB AND has reviews
   def self.has_reviews?(place_id)
     est = Establishment.find_by(place_id: place_id)
@@ -37,6 +39,8 @@ class Establishment < ApplicationRecord
           .map { |r| r[type_rating] }
           .reduce { |sum, r| r ? sum + r : sum } # avoid adding nil ratings
     total = self.reviews.filter { |r| r[type_rating] }.count
+
+    return 0 if !sum 
 
     (sum * 1.0 / total).round(1)
   end
