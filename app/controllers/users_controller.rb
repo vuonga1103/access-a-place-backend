@@ -28,6 +28,14 @@ class UsersController < ApplicationController
     render json: { user: UserSerializer.new(@user), token: token }
   end
 
+  def show
+    if @user = User.find_by(id: params[:id])
+      render json: @user
+    else
+      render json: { error: "No user with that id exists"}
+    end
+  end
+
   private
 
   def user_params

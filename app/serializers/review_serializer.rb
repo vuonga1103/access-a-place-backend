@@ -1,3 +1,13 @@
 class ReviewSerializer < ActiveModel::Serializer
-  attributes :id, :entrance_rating, :bathroom_rating, :parking_rating, :interior_rating, :content, :establishment, :user
+  attributes :id, :date, :entrance_rating, :bathroom_rating, :parking_rating, :interior_rating, :content, :user
+
+  def user
+    user = object.user
+    {
+      id: user.id,
+      email: user.email,
+      first_name: user.first_name,
+      last_name: user.last_name
+    }
+  end
 end

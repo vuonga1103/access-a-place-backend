@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   resources :reviews
   resources :establishments
-  resources :users, only: [:create]
+  resources :users
 
   post '/login', to: 'users#login'
-  get 'establishments/:id', to: 'establishments#show'
   get '/persist', to: 'users#persist'
 
 

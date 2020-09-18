@@ -39,19 +39,23 @@ biscuit = User.create({
 })
 
 est1 = Establishment.create({
-  place_id: "-0bdnX762vdTb9lI00etvA"
+  place_id: "4zw8vEJNc4mcHh2ARzj2gw",
+  name: "Osteria Brooklyn"
 })
 
 est2 = Establishment.create({
-  place_id: "xiEBdZ8z5KY21Vw2pY2fJQ"
+  place_id: "J8umpkNXrswbTXqLl9HteQ",
+  name: "Strangeways"
 })
 
 est3 = Establishment.create({
-  place_id: "wYgp-defqwJPhjC6Y_WKWg"
+  place_id: "6jPju63RQy3P3ov9-ejP7g",
+  name: "Sea Wolf - Williamsburg Waterfront"
 })
 
 est4 = Establishment.create({
-  place_id: "dkAj-3gmkvdA4XkJmw6hCw"
+  place_id: "4MDltWx_2dxzTEv6mTRfSQ",
+  name: "Rangoon"
 })
 
 rev1 = Review.create({
@@ -93,3 +97,5 @@ rev4 = Review.create({
   interior_rating: 3,
   content: "not bad"
 })
+
+puts "Finished Seeding."
