@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   post '/login', to: 'users#login'
   get '/persist', to: 'users#persist'
-  post 'establishments/get-rating-and-review-count', to: 'establishments#get_rating_and_review_count'
+  post '/yelp', to: 'establishments#yelp'
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -17,7 +17,14 @@ ActiveRecord::Schema.define(version: 2020_09_16_214304) do
 
   create_table "establishments", force: :cascade do |t|
     t.string "place_id"
+    t.string "alias"
     t.string "name"
+    t.string "image_url"
+    t.string "is_closed"
+    t.string "phone"
+    t.string "categories"
+    t.string "location"
+    t.string "coordinates"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

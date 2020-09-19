@@ -2,7 +2,9 @@ class Establishment < ApplicationRecord
   has_many :reviews
   has_many :users, through: :reviews
 
-  
+  serialize :categories, Array
+  serialize :location, Array
+  serialize :coordinates, Hash
 
   # Checks if establishment with given place_id exists in DB AND has reviews
   def self.has_reviews?(place_id)

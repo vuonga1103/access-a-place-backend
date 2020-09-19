@@ -8,18 +8,16 @@ class EstablishmentsController < ApplicationController
     end
   end
 
-  def get_rating_and_review_count
-    # If any establishment sent in front Yelp API exists and has a review in the database, return that establishment with key/value of review_count and average_overall; otherwise just return the establishment object untouched
-    updated_establishments = params[:businesses].map do |est|
-      
-      if Establishment.has_reviews?(est['id'])
-        db_est = Establishment.find_by(place_id: est['id'])
-        est['review_count'] = db_est.reviews.count
-        est['average_overall'] = db_est.average_overall
-      end
-      est
-    end
+  def yelp
+    api_key = ENV['YELP_API']
 
-    render json: updated_establishments
+    bearer_token = "Bearer " + api_key
+    
+    @response = HTTParty.get("https://api.yelp.com/v3/businesses/search?#{params[:query]}", :headers => {
+      "Content_Type": "application/json",
+      "Authorization": bearer_token
+    }).body
+
+    render json: @response
   end
 end

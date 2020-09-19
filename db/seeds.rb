@@ -40,22 +40,74 @@ biscuit = User.create({
 
 est1 = Establishment.create({
   place_id: "4zw8vEJNc4mcHh2ARzj2gw",
-  name: "Osteria Brooklyn"
+  alias: "osteria-brooklyn-brooklyn",
+  name: "Osteria Brooklyn",
+  image_url: "https://s3-media1.fl.yelpcdn.com/bphoto/QzJCcB5xHxvom5Ykn16EVA/o.jpg",
+  is_closed: false,
+  phone: "(646) 750-9156",
+  categories: ["Italian"],
+  location: [
+    "458 Myrtle Ave",
+    "Brooklyn, NY 11205"
+  ], 
+  coordinates: {
+    latitude: 40.693154,
+    longitude: -73.967177
+  }
 })
 
 est2 = Establishment.create({
-  place_id: "J8umpkNXrswbTXqLl9HteQ",
-  name: "Strangeways"
+  place_id: "FcHVRbMcYY-D1Glzwo3ofA",
+  alias: "mr-bao-brooklyn",
+  name: "MR BAO",
+  image_url: "https://s3-media4.fl.yelpcdn.com/bphoto/DOtT38IBRaEdOMnNDrFlTA/o.jpg",
+  is_closed: false,
+  phone: "",
+  categories: ["Shanghainese", "Asian Fusion"],
+  location: [
+    "179 5th Ave",
+    "Brooklyn, NY 11217"
+  ], 
+  coordinates: {
+    latitude: 40.67719,
+    longitude: -73.97981
+  }
 })
 
 est3 = Establishment.create({
-  place_id: "6jPju63RQy3P3ov9-ejP7g",
-  name: "Sea Wolf - Williamsburg Waterfront"
+  place_id: "J8umpkNXrswbTXqLl9HteQ",
+  alias: "strangeways-brooklyn",
+  name: "Strangeways",
+  image_url: "https://s3-media4.fl.yelpcdn.com/bphoto/FVgIh9SDzQokWYDYFD4LTQ/o.jpg",
+  is_closed: false,
+  phone: "",
+  categories: ["Bars", "American (New)"],
+  location: [
+    "302 Metropolitan Ave",
+    "Brooklyn, NY 11211"
+  ], 
+  coordinates: {
+    latitude: 40.714415,
+    longitude: -73.957989
+  }
 })
 
 est4 = Establishment.create({
-  place_id: "4MDltWx_2dxzTEv6mTRfSQ",
-  name: "Rangoon"
+  place_id: "6jPju63RQy3P3ov9-ejP7g",
+  alias: "sea-wolf-williamsburg-waterfront-new-york-2",
+  name: "Sea Wolf - Williamsburg Waterfront",
+  image_url: "https://s3-media3.fl.yelpcdn.com/bphoto/Jr-s32hkBKOMgOpLkdA4Tg/o.jpg",
+  is_closed: false,
+  phone: "(718) 782-9213",
+  categories: ["Seafood"],
+  location: [
+    "420 Kent Ave",
+    "New York, NY 11249"
+  ], 
+  coordinates: {
+    latitude: 40.709946,
+    longitude: -73.968608
+  }
 })
 
 rev1 = Review.create({
