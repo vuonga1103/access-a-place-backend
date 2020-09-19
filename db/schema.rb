@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_09_16_214304) do
     t.string "alias"
     t.string "name"
     t.string "image_url"
-    t.string "is_closed"
+    t.boolean "is_closed"
     t.string "phone"
     t.string "categories"
     t.string "location"

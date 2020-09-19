@@ -2,15 +2,11 @@ class Establishment < ApplicationRecord
   has_many :reviews
   has_many :users, through: :reviews
 
+  validates :place_id, uniqueness: true
+
   serialize :categories, Array
   serialize :location, Array
   serialize :coordinates, Hash
-
-  # Checks if establishment with given place_id exists in DB AND has reviews
-  def self.has_reviews?(place_id)
-    est = Establishment.find_by(place_id: place_id)
-    !!est && !!(est.reviews.count > 0)
-  end
 
   def average_entrance
     find_average('entrance_rating')

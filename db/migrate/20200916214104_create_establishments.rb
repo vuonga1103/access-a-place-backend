@@ -5,7 +5,7 @@ class CreateEstablishments < ActiveRecord::Migration[6.0]
       t.string :alias
       t.string :name
       t.string :image_url
-      t.string :is_closed
+      t.boolean :is_closed
       t.string :phone
       t.string :categories
       t.string :location
