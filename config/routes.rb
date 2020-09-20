@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   post '/login', to: 'users#login'
   get '/persist', to: 'users#persist'
-  post '/yelp', to: 'establishments#yelp'
+  post '/yelp-establishments', to: 'establishments#yelp_establishments'
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

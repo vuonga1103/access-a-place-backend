@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2020_09_16_214304) do
     t.string "categories"
     t.string "location"
     t.string "coordinates"
+    t.string "photos"
+    t.string "hours"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

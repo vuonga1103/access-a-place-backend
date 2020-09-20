@@ -7,6 +7,8 @@ class Establishment < ApplicationRecord
   serialize :categories, Array
   serialize :location, Array
   serialize :coordinates, Hash
+  serialize :photos, Array
+  serialize :hours, Array
 
   def average_entrance
     find_average('entrance_rating')

@@ -8,36 +8,39 @@ class EstablishmentsController < ApplicationController
     end
   end
 
-  def yelp
+  def yelp_establishments
     api_key = ENV['YELP_API']
     bearer_token = "Bearer " + api_key
     
-    response = HTTParty.get("https://api.yelp.com/v3/businesses/search?#{params[:query]}", :headers => {
+    response = JSON.parse(HTTParty.get("https://api.yelp.com/v3/businesses/search?#{params[:query]}", :headers => {
       "Content_Type": "application/json",
       "Authorization": bearer_token
-    }).body
-
-    establishments = JSON.parse(response)['businesses'].map do |api_est|
-      db_est = Establishment.find_by(place_id: api_est['id'])
-      db_est ? db_est : create_new_establishment_from_api(api_est)
+    }).body)
+    
+    if response['error']
+      render json: { error: "No Results Found"}
+    else
+      establishments = response['businesses'].map do |api_est|
+        db_est = Establishment.find_by(place_id: api_est['id'])
+        db_est ? db_est : create_db_est_from_api_est(api_est)
+      end
+      render json: establishments
     end
-
-    render json: establishments
   end
 
   private
 
-  def create_new_establishment_from_api(establishment_from_api)
+  def create_db_est_from_api_est(api_est)
     Establishment.create({
-      place_id: establishment_from_api['id'],
-      alias: establishment_from_api['alias'],
-      name: establishment_from_api['name'],
-      image_url: establishment_from_api['image_url'],
-      is_closed: establishment_from_api['is_closed'],
-      phone: establishment_from_api['display_phone'],
-      categories: establishment_from_api['categories'].map { |c| c['title'] },
-      location: establishment_from_api['location']['display_address'],
-      coordinates: establishment_from_api['coordinates'],
+      place_id: api_est['id'],
+      alias: api_est['alias'],
+      name: api_est['name'],
+      image_url: api_est['image_url'],
+      is_closed: api_est['is_closed'],
+      phone: api_est['display_phone'],
+      categories: api_est['categories'].map { |c| c['title'] },
+      location: api_est['location']['display_address'],
+      coordinates: api_est['coordinates'],
     })
   end
 end

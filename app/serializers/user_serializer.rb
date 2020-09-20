@@ -9,7 +9,7 @@ class UserSerializer < ActiveModel::Serializer
         place_id: review.establishment.place_id,
         entrance_rating: review.entrance_rating,
         bathroom_rating: review.bathroom_rating,
-        parking_rating: review. parking_rating,
+        parking_rating: review.parking_rating,
         interior_rating: review.interior_rating,
         content: review.content,
         date: review.date

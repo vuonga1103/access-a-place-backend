@@ -10,6 +10,8 @@ class CreateEstablishments < ActiveRecord::Migration[6.0]
       t.string :categories
       t.string :location
       t.string :coordinates
+      t.string :photos
+      t.string :hours
       t.timestamps
     end
   end
