@@ -1,4 +1,5 @@
 class EstablishmentsController < ApplicationController
+  @@bearer_token = "Bearer " + ENV['YELP_API']
 
   def show
     if establishment = Establishment.find_by(id: params[:id])
@@ -9,12 +10,9 @@ class EstablishmentsController < ApplicationController
   end
 
   def yelp_establishments
-    api_key = ENV['YELP_API']
-    bearer_token = "Bearer " + api_key
-    
     response = JSON.parse(HTTParty.get("https://api.yelp.com/v3/businesses/search?#{params[:query]}", :headers => {
       "Content_Type": "application/json",
-      "Authorization": bearer_token
+      "Authorization": @@bearer_token
     }).body)
     
     if response['error']
@@ -25,6 +23,22 @@ class EstablishmentsController < ApplicationController
         db_est ? db_est : create_db_est_from_api_est(api_est)
       end
       render json: establishments
+    end
+  end
+
+  def yelp_establishment
+    api_est = JSON.parse(HTTParty.get("https://api.yelp.com/v3/businesses/#{params[:slug]}", :headers => {
+      "Content_Type": "application/json",
+      "Authorization": @@bearer_token
+    }).body)
+
+    if api_est['error']
+      render json: { error: "No Results Found"}
+    else
+      db_est = Establishment.find_by(place_id: api_est['id'])
+      db_est = create_db_est_from_api_est(api_est) if !db_est
+      db_est.update(photos: api_est['photos'], hours: api_est['hours'])
+      render json: db_est
     end
   end
 
