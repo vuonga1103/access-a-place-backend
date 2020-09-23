@@ -1,19 +1,14 @@
 class EstablishmentsController < ApplicationController
-  @@bearer_token = "Bearer " + ENV['YELP_API']
-
-  def show
-    if establishment = Establishment.find_by(id: params[:id])
-      render json: establishment
-    else
-      render json: { error: "That establishment does not exist in the database"}
-    end
-  end
+  @@headers = {
+    :headers => { 
+      "Content_Type": "application/json",
+      "Authorization": "Bearer " + ENV['YELP_API']
+    }
+  }
 
   def yelp_establishments
-    response = JSON.parse(HTTParty.get("https://api.yelp.com/v3/businesses/search?#{params[:query]}", :headers => {
-      "Content_Type": "application/json",
-      "Authorization": @@bearer_token
-    }).body)
+
+    response = JSON.parse(HTTParty.get("https://api.yelp.com/v3/businesses/search?#{params[:query]}", @@headers).body)
     
     if response['error']
       render json: { error: "No Results Found"}
@@ -22,15 +17,13 @@ class EstablishmentsController < ApplicationController
         db_est = Establishment.find_by(place_id: api_est['id'])
         db_est ? db_est : create_db_est_from_api_est(api_est)
       end
+      
       render json: establishments
     end
   end
 
   def yelp_establishment
-    api_est = JSON.parse(HTTParty.get("https://api.yelp.com/v3/businesses/#{params[:slug]}", :headers => {
-      "Content_Type": "application/json",
-      "Authorization": @@bearer_token
-    }).body)
+    api_est = JSON.parse(HTTParty.get("https://api.yelp.com/v3/businesses/#{params[:slug]}", @@headers).body)
 
     if api_est['error']
       render json: { error: "No Results Found"}
@@ -45,6 +38,8 @@ class EstablishmentsController < ApplicationController
   private
 
   def create_db_est_from_api_est(api_est)
+    api_est['image_url'] = "https://tacm.com/wp-content/uploads/2018/01/no-image-available.jpeg" if api_est['image_url'].length == 0
+
     Establishment.create({
       place_id: api_est['id'],
       alias: api_est['alias'],
