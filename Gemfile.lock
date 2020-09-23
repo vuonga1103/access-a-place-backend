@@ -119,6 +119,7 @@ GEM
       mini_portile2 (~> 2.4.0)
     nokogiri (1.10.10-x86-mingw32)
       mini_portile2 (~> 2.4.0)
+    passgen (1.2.0)
     pg (1.2.3)
     pg (1.2.3-x64-mingw32)
     pg (1.2.3-x86-mingw32)
@@ -201,6 +202,7 @@ DEPENDENCIES
   httparty
   jwt
   listen (~> 3.2)
+  passgen
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
   rack-cors

@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :first_name, :last_name, :reviews
+  attributes :id, :email, :first_name, :last_name, :reviews, :image_url
 
   def reviews
     object.reviews.map do |review|

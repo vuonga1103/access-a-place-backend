@@ -6,6 +6,7 @@ ruby '2.6.1'
 gem 'active_model_serializers'
 gem 'jwt'
 gem 'httparty'
+gem 'passgen'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.3'
