@@ -21,6 +21,8 @@ Bundler.require(*Rails.groups)
 
 module AccessAPlaceBackend
   class Application < Rails::Application
+    config.middleware.use Rack::Session::Cookie
+    
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 

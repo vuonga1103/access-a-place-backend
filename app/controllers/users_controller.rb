@@ -23,20 +23,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def oauth_login
-    @user = User.find_by(email: params[:email])
-    
-    if !@user 
-      @user = User.create(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], image_url: params[:image_url], password: Passgen::generate)
-    end
-
-    # in case the user change their facebook or google details
-    @user.update(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], image_url: params[:image_url])
-
-    token = encode_token({user_id: @user.id})
-    render json: { user: UserSerializer.new(@user), token: token }
-  end
-
   def persist
     token = encode_token({user_id: @user.id})
     render json: { user: UserSerializer.new(@user), token: token }
@@ -48,6 +34,29 @@ class UsersController < ApplicationController
     else
       render json: { error: "No user with that id exists"}
     end
+  end
+
+  def get_authorization
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=#{params[:id_token]}"                  
+    response = HTTParty.get(url).parsed_response  
+
+    email = response["email"]
+    first_name = response["given_name"] || ""
+    last_name = response["family_name"] || ""
+    image_url = response["picture"] || ""
+
+    user = User.find_by(email: email)
+
+    if !user 
+      user = User.create(email: email, first_name: first_name, last_name: last_name, image_url: image_url, password: Passgen::generate)
+    end
+
+    # In case the user change their google details
+    user.update(email: email, first_name: first_name, last_name: last_name, image_url: image_url)
+
+    token = encode_token({user_id: user.id})
+    
+    render json: { user: UserSerializer.new(user), token: token }
   end
 
   private
