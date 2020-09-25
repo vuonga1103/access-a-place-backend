@@ -150,4 +150,24 @@ rev4 = Review.create({
   content: "not bad"
 })
 
+bookmark1 = Bookmark.create({
+  user: fluffy,
+  establishment: est1
+})
+
+bookmark2 = Bookmark.create({
+  user: fluffy,
+  establishment: est2 
+})
+
+bookmark4 = Bookmark.create({
+  user: misty,
+  establishment: est3
+})
+
+bookmark5 = Bookmark.create({
+  user: misty,
+  establishment: est4 
+})
+
 puts "Finished Seeding."

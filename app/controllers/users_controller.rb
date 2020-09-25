@@ -37,6 +37,7 @@ class UsersController < ApplicationController
   end
 
   def get_authorization
+    # Use token sent in from frontend to fetch user information 
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=#{params[:id_token]}"                  
     response = HTTParty.get(url).parsed_response  
 
@@ -48,10 +49,10 @@ class UsersController < ApplicationController
     user = User.find_by(email: email)
 
     if !user 
-      user = User.create(email: email, first_name: first_name, last_name: last_name, image_url: image_url, password: Passgen::generate)
+      user = User.create(email: email, first_name: first_name, last_name: last_name, image_url: image_url, password: Passgen::generate) # Random password generated for user who logs in via Google
     end
 
-    # In case the user change their google details
+    # In case the user changes their google details
     user.update(email: email, first_name: first_name, last_name: last_name, image_url: image_url)
 
     token = encode_token({user_id: user.id})

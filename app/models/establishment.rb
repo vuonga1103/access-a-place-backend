@@ -2,6 +2,9 @@ class Establishment < ApplicationRecord
   has_many :reviews
   has_many :users, through: :reviews
 
+  has_many :bookmarks
+  has_many :users, through: :bookmarks
+
   validates :place_id, uniqueness: true
 
   serialize :categories, Array

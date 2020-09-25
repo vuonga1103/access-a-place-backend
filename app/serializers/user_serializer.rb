@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :first_name, :last_name, :reviews, :image_url
+  attributes :id, :email, :first_name, :last_name, :image_url, :reviews, :bookmarks
 
   def reviews
     object.reviews.map do |review|
@@ -15,5 +15,18 @@ class UserSerializer < ActiveModel::Serializer
         date: review.date
       }
     end
+  end
+
+  def bookmarks
+    object.bookmarks.map do |bookmark|
+      {
+        id: bookmark.id,
+        place_name: bookmark.establishment.name,
+        place_slug: bookmark.establishment.alias,
+        place_image: bookmark.establishment.image_url,
+        date: bookmark.date
+      }
+    end
+
   end
 end
