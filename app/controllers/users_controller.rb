@@ -60,6 +60,20 @@ class UsersController < ApplicationController
     render json: { user: UserSerializer.new(user), token: token }
   end
 
+  # def add_or_remove_bookmark
+  #   bookmark = Bookmark.find_by(establishment_id: params[:establishment][:id], user_id: params[:user_id])
+
+  #   user = User.find_by(id: params[:user_id])
+
+  #   if params[:is_bookmarked]
+  #     bookmark.destroy
+  #   else
+  #     bookmark = Bookmark.create(establishment_id: params[:establishment][:id], user_id: params[:user_id])
+  #   end
+    
+  #   render json: user
+  # end
+
   private
 
   def user_params

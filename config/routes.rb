@@ -6,10 +6,16 @@ Rails.application.routes.draw do
 
   post '/login', to: 'users#login'
   get '/persist', to: 'users#persist'
+  post 'auth/request', to:'users#get_authorization'
+
   post '/yelp-establishments', to: 'establishments#yelp_establishments'
   post '/yelp-establishment', to: 'establishments#yelp_establishment'
 
-  post 'auth/request', to:'users#get_authorization'
+  # post '/add-or-remove-bookmark', to: 'users#add_or_remove_bookmark'
+
+  get '/user-bookmarks', to: 'bookmarks#user_bookmarks'
+  post '/add-or-remove-bookmark', to: 'bookmarks#add_or_remove_bookmark'
+  
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

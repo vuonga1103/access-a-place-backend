@@ -16,17 +16,4 @@ class UserSerializer < ActiveModel::Serializer
       }
     end
   end
-
-  def bookmarks
-    object.bookmarks.map do |bookmark|
-      {
-        id: bookmark.id,
-        place_name: bookmark.establishment.name,
-        place_slug: bookmark.establishment.alias,
-        place_image: bookmark.establishment.image_url,
-        date: bookmark.date
-      }
-    end
-
-  end
 end
