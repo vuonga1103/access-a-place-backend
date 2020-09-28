@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :authorized, only: [:create]
+  before_action :authorized, only: [:create, :destroy]
   
   def create
     review = @user.reviews.build(review_params)
@@ -8,6 +8,13 @@ class ReviewsController < ApplicationController
     review.save
 
     render json: establishment
+  end
+
+  def destroy
+    review = Review.find_by(id: params[:id])
+    review.destroy
+
+    render json: {establishment: EstablishmentSerializer.new(review.establishment), user: UserSerializer.new(review.user)}
   end
 
   private

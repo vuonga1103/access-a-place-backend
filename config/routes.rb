@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   post '/yelp-establishments', to: 'establishments#yelp_establishments'
   post '/yelp-establishment', to: 'establishments#yelp_establishment'
 
-  # post '/add-or-remove-bookmark', to: 'users#add_or_remove_bookmark'
-
   get '/user-bookmarks', to: 'bookmarks#user_bookmarks'
   post '/add-or-remove-bookmark', to: 'bookmarks#add_or_remove_bookmark'
   

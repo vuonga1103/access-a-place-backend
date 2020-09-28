@@ -6,4 +6,8 @@ class User < ApplicationRecord
 
   has_secure_password
   validates :email, uniqueness: { case_sensitive: false }
+
+  def date_joined
+    self.created_at.to_date.strftime("%m/%d/%Y")
+  end
 end
