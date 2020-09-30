@@ -1,6 +1,6 @@
 # Access-A-Place Backend 
 
-[Video Demo]()
+[Video Demo](https://www.youtube.com/watch?v=l6LJ974UmFM)
 
 This is the Ruby on Rails API for Access-A-Place. Access-A-Place is a crowdsource web application that allows user to view, bookmark, and write reviews of establishments based on accessibility.
 
