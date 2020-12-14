@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorized, only: [:persist]
+  before_action :authorized, only: [:persist, :destroy, :update]
 
   def create
     @user = User.create(user_params)
@@ -36,6 +36,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def num_reviews
+    if @user = User.find_by(id: params[:id])
+      render json: @user.reviews.count
+    else
+      render json: { error: "No user with that id exists"}
+    end
+  end
+
   def get_authorization
     # Use token sent in from frontend to fetch user information 
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=#{params[:id_token]}"                  
@@ -58,6 +66,17 @@ class UsersController < ApplicationController
     token = encode_token({user_id: user.id})
     
     render json: { user: UserSerializer.new(user), token: token }
+  end
+
+  def destroy
+    @user.destroy
+    render json: @user
+  end
+
+  def update
+    @user.update(email: params[:email], password: params[:password])
+    token = encode_token({user_id: @user.id})
+    render json: { user: UserSerializer.new(@user), token: token }
   end
 
   private

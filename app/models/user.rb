@@ -1,7 +1,8 @@
 class User < ApplicationRecord
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_many :establishments, through: :reviews
-  has_many :bookmarks
+  
+  has_many :bookmarks, dependent: :destroy
   has_many :establishments, through: :bookmarks
 
   has_secure_password
