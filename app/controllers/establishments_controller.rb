@@ -13,6 +13,7 @@ class EstablishmentsController < ApplicationController
     if response['error']
       render json: { error: "No Results Found"}
     else
+      byebug
       establishments = response['businesses'].map do |api_est|
         db_est = Establishment.find_by(place_id: api_est['id'])
         db_est ? db_est : create_db_est_from_api_est(api_est)
