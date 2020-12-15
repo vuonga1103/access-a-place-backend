@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_action :authorized, only: [:persist, :destroy, :update]
 
+  def welcome
+    render json: "Welcome to the API".to_json
+  end
+
   def create
     @user = User.create(user_params)
 

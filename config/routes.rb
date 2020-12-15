@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :establishments
   resources :users
 
+  root to: 'users#welcome'
   post '/login', to: 'users#login'
   get '/persist', to: 'users#persist'
   post 'auth/request', to:'users#get_authorization'
